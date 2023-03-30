@@ -6,6 +6,7 @@ const imageMarkup = galleryItems.map(({preview, original, description}) => `
 <li class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
+      loading='lazy'
       class="gallery__image"
       src="${preview}"
       data-source="${original}"
@@ -21,7 +22,7 @@ galleryEl.insertAdjacentHTML('beforeend', imageMarkup)
 galleryEl.addEventListener('click', onOpenModalImg)
 
 function onOpenModalImg(e) {
-  if (e.target.classList.value !== 'gallery__image') {
+  if (e.target.classList[0] !== 'gallery__image') {
     return;
   }
 
@@ -42,4 +43,12 @@ function onOpenModalImg(e) {
       instance.close()
     document.removeEventListener('keydown', onCloseModal)
   }
+}
+
+const allImage = document.querySelectorAll('.gallery__image')
+
+allImage.forEach(item => item.addEventListener('load', onLoadedImg))
+
+function onLoadedImg(e) {
+  e.target.classList.add('gallery__image--loaded')
 }

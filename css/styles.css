@@ -22,14 +22,23 @@
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
-.gallery__image:hover {
-  transform: scale(1.03);
-}
-
 .gallery__image {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 1s var(--timing-function),
+              opacity 1s var(--timing-function);
+}
+.gallery__image.gallery__image--loaded {
+  
+  transform: scale(1);
+  opacity: 1;
+}
+
+.gallery__image.gallery__image--loaded:hover {
+  transform: scale(1.03);
   transition: transform var(--animation-duration) var(--timing-function);
 }
 
